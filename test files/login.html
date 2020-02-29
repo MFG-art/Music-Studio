@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+<link href='login.css' rel='stylesheet' type='text/css'>
+    <title>login to code music nation </title>
+  </head>
+
+  <body>
+    
+
+
+
+
+
+<form method="post" action="index.html">
+<div class="box">
+<h1>Dashboard</h1>
+
+<input id="username-input" type="username" name="username" value="username" onFocus="field_focus(this, 'username');" onblur="field_blur(this, 'username');" class="password" />
+  
+<input id="password-input"  type="password" name="password" value="password" onFocus="field_focus(this, 'password');" onblur="field_blur(this, 'password');" class="password" />
+  
+<a href="index.html"><div  id="sign-in-btn"  class="btn">Sign In</div></a> <!-- End Btn -->
+
+<a href="signup.html"><div id="sign-up-btn">Sign Up</div></a> <!-- End Btn2 -->
+  
+</div> <!-- End Box -->
+  
+</form>
+
+
+
+
+</body>
+
+
+</html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript">
+
+function field_focus(field, password)
+  {
+    if(field.value == password)
+    {
+      field.value = '';
+    }
+  }
+
+  function field_blur(field, password)
+  {
+    if(field.value == '')
+    {
+      field.value = password;
+    }
+  }
+
+//Fade in dashboard box
+$(document).ready(function(){
+    $('.box').hide().fadeIn(1000);
+    });
+
+//Stop click event
+$('a').click(function(event){
+    event.preventDefault(); 
+	});
+
+</script>

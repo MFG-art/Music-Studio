@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+
+<head> 
+<link rel="stylesheet" type="text/css" href="signup.css" >
+<link rel="jquery" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js">
+</head>
+<body>
+
+
+
+
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action="/action_page.php">
+    <div class="container">
+      <h1>Sign Up</h1>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
+      <label for="username"><b>username</b></label>
+      <input id="username-input"  type="text" placeholder="username" name="username" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input id="password-input"  type="password" placeholder="Enter Password" name="psw" required>
+
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input id="password-confitm-input"  type="password" placeholder="Repeat Password" name="psw-repeat" required>
+      
+      
+
+      
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="submit"  id="sign-up-btn"  class="signupbtn">Sign Up</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+
+
+
+</script>
+
+</body>
+</html>
