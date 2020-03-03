@@ -3,8 +3,12 @@ const router = express.Router();
 const Users = require("../models/users");
 
 router.get("/users", (req, res, next) => {
+  console.log("Inside the get call");
   Users.find({})
-    .then(data => res.json(data))
+    .then(data => {
+      console.log(data);
+      return res.json(data);
+    })
     .catch(next);
 });
 
