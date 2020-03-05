@@ -3,8 +3,6 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const APIroutes = require("./routes/api.js");
-const HTMLroutes = require("./routes/html.js");
-const path = require("path");
 
 const dotenv = require("dotenv").config();
 console.log(dotenv);
@@ -22,7 +20,7 @@ app.use(logger("dev"));
 
 app.use(bodyParser.json());
 app.use("/api", APIroutes);
-app.use("/", HTMLroutes);
+
 app.use((err, req, res, next) => {
   console.log(err);
   res.header("Access-Control-Allow-Origin", "*");

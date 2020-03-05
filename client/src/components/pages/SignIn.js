@@ -12,6 +12,10 @@ function handleSignIn() {
     .get("api/users")
     .then(function(response) {
       console.log(response.data);
+      console.log(response.data[0]._id);
+      if (!sessionStorage.getItem("user-id")) {
+        sessionStorage.setItem("user-id", response.data[0]._id);
+      }
       var usersArray = response.data;
       var match = false;
       var loggedInUser;
@@ -28,6 +32,8 @@ function handleSignIn() {
       console.log("Done with for loop. match = " + match);
       if (match) {
         console.log("Welcome,  " + loggedInUser);
+      } else {
+        alert("Invalid login info");
       }
     })
     .catch(function(error) {
