@@ -62,7 +62,7 @@ function handleOnClick() {
 function Project() {
   return (
     <div>
-      <button id="play-button" onClick={handleOnClick()}>
+      <button id="play-button" onClick={() => handleOnClick()}>
         Play
       </button>
     </div>

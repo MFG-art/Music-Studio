@@ -32,6 +32,7 @@ function handleSignIn() {
       console.log("Done with for loop. match = " + match);
       if (match) {
         console.log("Welcome,  " + loggedInUser);
+        window.location = "/project";
       } else {
         alert("Invalid login info");
       }
