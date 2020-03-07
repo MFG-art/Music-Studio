@@ -9,7 +9,7 @@ function setTempo(tempo) {
 }
 
 const notes = [
-  false,
+  0,
   261.63, // C4 1
   277.18,
   293.66, //D4  3
@@ -28,16 +28,18 @@ const notes = [
 function handleOnClick() {
   console.log("clicked button");
   let audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  var time = audioContext.currentTime;
+
   var noteLength = setTempo(100);
 
-  var noteArray = [1, 3, 5, 6, 8, 8, 1, 2, 2];
+  var noteArray = [1, 0, 1, 3, 4, 5, 0, 0, 6, 6, 7, 5, 0, 1, 1, 2, 0, 1];
+
+  var time = audioContext.currentTime;
 
   function playMelody() {
     var loopCount = 0;
     for (var i = 0; i < noteArray.length; i++) {
       var loop = noteArray.length - 1 === i;
-      playNote(audioContext, notes[noteArray[i]], loop);
+      time = playNote(audioContext, notes[noteArray[i]], loop);
       console.log(noteArray.length);
       console.log(loopCount);
       loopCount++;
@@ -48,10 +50,19 @@ function handleOnClick() {
   function playNote(audioContext, note, loop) {
     var oscillator = audioContext.createOscillator();
     oscillator.type = "sawtooth";
-    oscillator.connect(audioContext.destination);
-    oscillator.frequency.value = note;
+    var lowPassFilter = audioContext.createBiquadFilter();
+    lowPassFilter.type = "lowpass";
+    lowPassFilter.frequency.setValueAtTime(4000, time);
+    oscillator.connect(lowPassFilter);
+    lowPassFilter.connect(audioContext.destination);
+
+    oscillator.frequency.value = note / 4;
 
     oscillator.start(time);
+
+    lowPassFilter.frequency.linearRampToValueAtTime(500, time + noteLength / 2);
+    lowPassFilter.frequency.linearRampToValueAtTime(50, time + noteLength);
+
     time += noteLength;
     oscillator.stop(time);
 

@@ -10,6 +10,7 @@ console.log(process.env.DB);
 
 const app = express();
 const port = process.env.PORT || 3001;
+app.use("/api", APIroutes);
 
 mongoose
   .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -19,7 +20,6 @@ mongoose
 app.use(logger("dev"));
 
 app.use(bodyParser.json());
-app.use("/api", APIroutes);
 
 app.use((err, req, res, next) => {
   console.log(err);
