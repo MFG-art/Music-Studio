@@ -9,6 +9,7 @@ import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import Project from "./components/pages/Project";
 import PageNotFound from "./components/pages/PageNotFound";
+import User from "./components/pages/User";
 function App() {
   const [state, setState] = useState({
     authentication: sessionStorage.getItem("user-id") ? true : false
@@ -22,6 +23,8 @@ function App() {
         {state.authentication && (
           <Route exact path="/project" component={Project} />
         )}
+        {state.authentication && <Route exact path="/user" component={User} />}
+
         <Route path="/404" component={PageNotFound} />
         <Redirect to="/404" />
       </Switch>

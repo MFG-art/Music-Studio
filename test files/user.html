@@ -1,42 +1,24 @@
 <!DOCTYPE html>
 <html>
- 
- <html ng-app>
-  <head>
-  <link rel="stylesheet" type="text/css" href="user.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-    <script src="//use.edgefonts.net/vast-shadow:n4:all.js"></script>
-    <script src="//use.edgefonts.net/vast-shadow:n4:all;megrim.js"></script>
-    <script src="user.js"></script>
-  </head>
-  <body>
-    <div class="Music-wrapper" ng-controller="MusicCtrl">
-      <h2>You've got <span class="emphasis">{{getTotalMusic()}}</span> songs done</h2>
-      <form>
-        <input class="add-input" placeholder="song name..." type="text" ng-model="formMusicText" ng-model-instant /> 
-        <button class="add-btn" ng-click="addMusic()"><h2>Add</h2></button>
-      </form>
-      <ul>
-        
-        <li ng-repeat="song in Music">
-          
-          <input type="checkbox" ng-model="song.done"/>
-          <button class='button'></button>
-          <span class="done-{{song.done}}"> {{song.text}}</span>
-          <span class="float"> <link class="float">edit</link> </span>
-        
-        </li>
+  <html ng-app>
+    <head>
+      <link rel="stylesheet" type="text/css" href="user.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+      <script src="//use.edgefonts.net/vast-shadow:n4:all.js"></script>
+      <script src="//use.edgefonts.net/vast-shadow:n4:all;megrim.js"></script>
+      <script src="user.js"></script>
+    </head>
+    <body>
+      <div class="Music-wrapper" ng-controller="MusicCtrl">
+        <h2>
+          You have <span class="emphasis">{{getTotalMusic()}}</span> saved
+          projects
+        </h2>
 
-      </ul>
-      
-      
-      <button class="clear-btn" ng-click="clearCompleted()">delete </button>
-    </div>
-  </body>
-  
-</html>   
+        <ul></ul>
 
-  
-
-  
+        <button class="clear-btn" ng-click="clearCompleted()">delete</button>
+      </div>
+    </body>
+  </html>
 </html>

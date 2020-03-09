@@ -1,6 +1,6 @@
 body {
   font-family: "Open Sans", sans-serif;
-  background: #3498db;
+  background: #a4c6dd;
   margin: 0 auto 0 auto;
   width: 100%;
   text-align: center;
@@ -24,7 +24,7 @@ h1 {
   border-radius: 6px;
   margin: 0 auto 0 auto;
   padding: 0px 0px 70px 0px;
-  border: #2980b9 4px solid;
+  border: #2980b9 1px solid;
 }
 
 .email {
