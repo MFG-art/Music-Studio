@@ -1,0 +1,26 @@
+body {
+    background: #13756D;
+  
+  
+  h2 {
+    font-size: 2em;
+    
+    font-family: megrim, fantasy;
+    background: #1CA89C;
+    padding: 40px;
+    margin: 0;
+    color: #333;
+    text-align: center;
+   }
+  }
+  
+  
+  
+  #centered {width:80%;
+  margin-left:auto; border-; margin-right:auto;}
+  
+  .bottom {  border-bottom: outset  ; border-left: 6px solid black; border-right:6px solid black;}
+  
+  .middle {border-left: 6px solid black; border-right:6px solid black;}
+  
+  .top { border-top: outset ;border-left: 6px solid black; border-right:6px solid black; ;}

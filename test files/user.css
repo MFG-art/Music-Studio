@@ -33,17 +33,18 @@ li {
   font-family: megrim, fantasy;
   font-size: 2em;
   padding: 40px;
-  
-  background: #65d8cb; /* Old browsers */
-  background: -webkit-gradient(linear, 0 0, 0 100%, from(#65d8cb), to(#72f4e9));
+  background: #65d8cb;
+  /*Oldbrowsers*/background: -webkit-gradient(linear, 0 0, 0 100%, from(#65d8cb), to(#72f4e9));
   background: -webkit-linear-gradient(#65d8cb 0%, #72f4e9 100%);
   background: -moz-linear-gradient(#65d8cb 0%, #72f4e9 100%);
   background: -o-linear-gradient(#65d8cb 0%, #72f4e9 100%);
   background: linear-gradient(#65d8cb 0%, #72f4e9 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#65d8cb', endColorstr='#72f4e9',GradientType=0 );
+  filter:
+  progid:DXImageTransform.Microsoft.gradient( startColorstr='#65d8cb', endColorstr='#72f4e9',GradientType=0 );
   list-style-type: none;
   margin-left: 0px;
   padding-left: 0px;
+  -webkit-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#65d8cb', endColorstr='#72f4e9',GradientType=0 );
 }
 
 li input[type="checkbox"] {
@@ -71,14 +72,12 @@ li input[type="checkbox"] {
   background: #29F4E3;
   padding: 0;
   height: 100px;
-  h2 {
-   background: #29F4E3;
+  h2 { background: #29F4E3;
    padding: 0;
    font-size: 4em;
    font-family: megrim, fantasy;
    color: #333;
-  };
-}
+  }}
 
 .clear-btn {
   width: 100%;
@@ -112,5 +111,6 @@ li input[type="checkbox"] {
   &:hover {
     border-color: transparent transparent transparent #404040;
   }
+
 }
 .float {float:right;}
