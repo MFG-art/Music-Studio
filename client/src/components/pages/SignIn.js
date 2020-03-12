@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 function handleSignIn() {
@@ -13,9 +13,7 @@ function handleSignIn() {
     .then(function(response) {
       console.log(response.data);
       console.log(response.data[0]._id);
-      if (!sessionStorage.getItem("user-id")) {
-        sessionStorage.setItem("user-id", response.data[0]._id);
-      }
+
       var usersArray = response.data;
       var match = false;
       var loggedInUser;
@@ -27,12 +25,15 @@ function handleSignIn() {
           match = true;
           console.log(match);
           loggedInUser = usersArray[i].username;
+          sessionStorage.setItem("username", loggedInUser);
+          sessionStorage.setItem("user-id", response.data[i]._id);
         }
       }
       console.log("Done with for loop. match = " + match);
       if (match) {
         console.log("Welcome,  " + loggedInUser);
-        window.location = "/project";
+        var newUrl = "/user/" + loggedInUser;
+        window.location = newUrl;
       } else {
         alert("Invalid login info");
       }

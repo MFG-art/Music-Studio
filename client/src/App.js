@@ -21,9 +21,10 @@ function App() {
         <Route exact path="/sign-up" component={SignUp} />
         <Route exact path="/sign-in" component={SignIn} />
         {state.authentication && (
-          <Route exact path="/project" component={Project} />
+          <Route exact path="/project/:name" component={Project} />
         )}
-        {state.authentication && <Route exact path="/user" component={User} />}
+
+        <Route exact path="/user/:username" component={User} />
 
         <Route path="/404" component={PageNotFound} />
         <Redirect to="/404" />

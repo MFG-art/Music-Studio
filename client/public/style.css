@@ -10,7 +10,7 @@ body {
 p {
   font-size: 12px;
   text-decoration: none;
-  color: #ffffff;
+  color: black;
 }
 
 h1 {
@@ -21,6 +21,14 @@ h1 {
 .box {
   background: white;
   width: 300px;
+  border-radius: 6px;
+  margin: 0 auto 0 auto;
+  padding: 0px 0px 70px 0px;
+  border: #2980b9 1px solid;
+}
+.main {
+  background: white;
+  width: 80%;
   border-radius: 6px;
   margin: 0 auto 0 auto;
   padding: 0px 0px 70px 0px;
@@ -88,4 +96,12 @@ h1 {
 
 #btn2:hover {
   background: #3594d2;
+}
+
+#projectsList {
+  color: black;
+}
+
+.note-select {
+  float: left;
 }

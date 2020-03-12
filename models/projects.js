@@ -5,10 +5,11 @@ const ProjectsSchema = new Schema({
     type: String,
     required: [true, "The text field is required"]
   },
-  notes: {
-    type: Array,
-    required: [true, "The text field is required"]
-  },
+  notes: [
+    {
+      type: String
+    }
+  ],
   owner: {
     type: String,
     required: [true, "The text field is required"]
