@@ -14,23 +14,18 @@ function getProjects() {
 
     document.getElementById("projectsList").innerHTML = "";
 
-    if (projectsList[0]) {
+    if (projectsList.length > 0) {
       projectsList.forEach(project => {
-        console.log(project.name);
-        console.log(typeof project.name);
         var projectDiv = document.createElement("div");
         projectDiv.setAttribute("id", project.name);
-
         // name element
         var projectNameEl = document.createElement("p");
         projectNameEl.setAttribute("className", "project-name");
         projectNameEl.innerHTML = project.name;
-
         // Link element
         var projectLink = document.createElement("a");
         projectLink.setAttribute("href", "/project/" + project._id);
         projectLink.innerText = "Project Link";
-
         // Appending elements
         projectDiv.appendChild(projectNameEl);
         projectDiv.appendChild(projectLink);
