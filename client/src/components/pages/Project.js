@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Notation } from "react-abc";
 import axios from "axios";
 import { Score } from "react-vexflow";
 
@@ -28,7 +29,10 @@ const notes = [
 ];
 
 function Project() {
-  const [project, setProject] = useState({ name: "", notes: [] });
+  const [project, setProject] = useState({
+    name: "",
+    notes: []
+  });
   useEffect(() => {
     const projectId = window.location.pathname.split("/")[2];
 
@@ -187,6 +191,7 @@ function Project() {
       project_id: project.project_id
     });
   }
+
   function handleOnChange(event) {
     console.log("Inside handleOnChange");
     console.log(event.target.id, event.target.value);
@@ -195,6 +200,63 @@ function Project() {
     notes[event.target.id] = event.target.value;
   }
 
+  function getNotation() {
+    console.log("Inside of getNotation()");
+    console.log(project.notes);
+    var notationString = "";
+    project.notes.forEach(note => {
+      console.log(note);
+      switch (note) {
+        case "rest":
+          notationString += "z";
+          break;
+        case "C4":
+          notationString += "C ";
+          break;
+        case "C#4":
+          notationString += "C^ ";
+          break;
+        case "D4":
+          notationString += "D ";
+          break;
+        case "D#4":
+          notationString += "D^ ";
+          break;
+        case "E4":
+          notationString += "E ";
+          break;
+        case "F4":
+          notationString += "F ";
+          break;
+        case "F#4":
+          notationString += "F^ ";
+          break;
+        case "G4":
+          notationString += "G ";
+          break;
+        case "G#4":
+          notationString += "G^ ";
+          break;
+        case "A4":
+          notationString += "A ";
+          break;
+        case "A#4":
+          notationString += "A^ ";
+          break;
+        case "B4":
+          notationString += "B ";
+          break;
+        case "C5":
+          notationString += "c ";
+          break;
+        default:
+          notationString += "C ";
+          break;
+      }
+    });
+    notationString += "|";
+    return notationString;
+  }
   return (
     <div>
       <input
@@ -210,39 +272,53 @@ function Project() {
       <button id="update-button" onClick={event => handleProjectSave(event)}>
         Save
       </button>
-      {project
-        ? project.notes.map((note, index, array) => (
-            <div className="note-select">
-              <div>
-                <p>note: {index + 1}</p>
-                <select
-                  id={index}
-                  defaultValue={note}
-                  key={index}
-                  onChange={event => {
-                    handleOnChange(event);
-                  }}
-                >
-                  <option value="rest">--</option>
-                  <option value="C4">C4</option>
-                  <option value="C#4">C#4</option>
-                  <option value="D4">D4</option>
-                  <option value="D#4">D#4</option>
-                  <option value="E4">E4</option>
-                  <option value="F4">F4</option>
-                  <option value="F#4">F#4</option>
-                  <option value="G4">G4</option>
-                  <option value="G#4">G#4</option>
-                  <option value="A4">A4</option>
-                  <option value="A#4">A#4</option>
-                  <option value="B4">B4</option>
-                  <option value="C5">C5</option>
-                </select>
+      <div
+        style={{
+          margin: "auto",
+          marginTop: "10px",
+          marginBottom: "10px",
+          border: "1px solid grey",
+          padding: "5px",
+          overflow: "auto",
+          width: "60%"
+        }}
+      >
+        {project
+          ? project.notes.map((note, index, array) => (
+              <div className="note-select">
+                <div>
+                  <p>note: {index + 1}</p>
+                  <select
+                    id={index}
+                    defaultValue={note}
+                    key={index}
+                    onChange={event => {
+                      handleOnChange(event);
+                    }}
+                  >
+                    <option value="rest">--</option>
+                    <option value="C4">C4</option>
+                    <option value="C#4">C#4</option>
+                    <option value="D4">D4</option>
+                    <option value="D#4">D#4</option>
+                    <option value="E4">E4</option>
+                    <option value="F4">F4</option>
+                    <option value="F#4">F#4</option>
+                    <option value="G4">G4</option>
+                    <option value="G#4">G#4</option>
+                    <option value="A4">A4</option>
+                    <option value="A#4">A#4</option>
+                    <option value="B4">B4</option>
+                    <option value="C5">C5</option>
+                  </select>
+                </div>
               </div>
-            </div>
-          ))
-        : null}
-      <div id="boo"></div>
+            ))
+          : null}
+      </div>
+      <hr />
+      {project.notes[0] && <Notation notation={getNotation()} />}
+
       <a href={"/user/" + sessionStorage.getItem("username")}>
         Go back to your projects page
       </a>
