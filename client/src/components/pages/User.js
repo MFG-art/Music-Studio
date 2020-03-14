@@ -77,8 +77,19 @@ function User() {
 
         {projects.array.map(project => {
           return (
-            <div>
-              <p>{project.name}</p>
+            <div
+              style={{
+                margin: "auto",
+                marginTop: "10px",
+                marginBottom: "10px",
+                border: "1px solid grey",
+                padding: "5px",
+                overflow: "auto",
+                width: "20%",
+                backgroundColor: "lightGrey"
+              }}
+            >
+              <p style={{ fontSize: "20px" }}>{project.name}</p>
               <button>
                 <a href={"/project/" + project._id}>Open project</a>
               </button>

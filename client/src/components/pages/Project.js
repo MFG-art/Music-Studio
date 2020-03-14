@@ -77,13 +77,46 @@ function Project() {
       .then(response => console.log(response));
   }
 
+  function handleProjectDelete(event) {
+    event.preventDefault();
+    console.log("Inside handleProjectDelete()", project);
+    var updatedNotesArray = [];
+    for (var i = 0; i < project.notes.length; i++) {
+      updatedNotesArray.push(document.getElementById(i.toString()).value);
+    }
+    console.log(updatedNotesArray);
+    setProject({
+      name: project.name,
+      notes: updatedNotesArray,
+      project_id: project.project_id,
+      owner: project.owner
+    });
+    setTimeout(() => {
+      console.log("This is what project looks like now", project);
+    }, 1000);
+
+    axios
+      .delete("/api/project/" + project.project_id, {
+        name: project.name,
+        notes: project.notes,
+        owner: project.owner
+      })
+      .then(response => {
+        console.log(response);
+        var username = sessionStorage.getItem("username");
+        window.location.pathname = "/user/" + username;
+      });
+  }
+
   function handleOnClick(event) {
     console.log("clicked button");
     console.log("This is project notes", project.notes);
 
     let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-    var noteLength = setTempo(80);
+    var noteLength = setTempo(
+      parseInt(document.getElementById("inputBPM").value)
+    );
 
     var updatedNotesArray = [];
     for (var i = 0; i < project.notes.length; i++) {
@@ -144,19 +177,15 @@ function Project() {
 
     var time = audioContext.currentTime;
 
-    function playMelody() {
-      var loopCount = 0;
-      for (var i = 0; i < noteArray.length; i++) {
-        var loop = noteArray.length - 1 === i;
-        time = playNote(audioContext, notes[noteArray[i]], loop);
-        console.log(noteArray.length);
-        console.log(loopCount);
-        loopCount++;
+    const loopTimes = parseInt(document.getElementById("loopSelect").value);
+    async function playMelody() {
+      for (var i = 0; i < noteArray.length * loopTimes; i++) {
+        time = await playNote(audioContext, notes[noteArray[i % 16]]);
       }
     }
 
     playMelody();
-    function playNote(audioContext, note, loop) {
+    function playNote(audioContext, note) {
       var oscillator = audioContext.createOscillator();
       oscillator.type = "sawtooth";
       var lowPassFilter = audioContext.createBiquadFilter();
@@ -177,11 +206,9 @@ function Project() {
 
       time += noteLength;
       oscillator.stop(time);
-
       return time;
     }
   }
-
   function handleNameChange(event) {
     console.log(event.target.value);
     setProject({
@@ -259,19 +286,6 @@ function Project() {
   }
   return (
     <div>
-      <input
-        id="project-name"
-        defaultValue={project.name ? project.name : null}
-        onChange={event => {
-          handleNameChange(event);
-        }}
-      ></input>
-      <button id="play-button" onClick={event => handleOnClick(event)}>
-        Play
-      </button>
-      <button id="update-button" onClick={event => handleProjectSave(event)}>
-        Save
-      </button>
       <div
         style={{
           margin: "auto",
@@ -280,7 +294,69 @@ function Project() {
           border: "1px solid grey",
           padding: "5px",
           overflow: "auto",
-          width: "60%"
+          width: "60%",
+          backgroundColor: "lightGrey"
+        }}
+      >
+        <input
+          style={{ float: "left", margin: "5px" }}
+          id="project-name"
+          defaultValue={project.name ? project.name : null}
+          onChange={event => {
+            handleNameChange(event);
+          }}
+        ></input>
+        <button
+          style={{ float: "left", margin: "5px" }}
+          id="play-button"
+          onClick={event => handleOnClick(event)}
+        >
+          Play
+        </button>
+        <button
+          style={{ float: "left", margin: "5px" }}
+          id="update-button"
+          onClick={event => handleProjectSave(event)}
+        >
+          Save
+        </button>
+        <button
+          style={{
+            float: "left",
+            margin: "5px",
+            color: "red",
+            fontWeight: "bold"
+          }}
+          id="delete-button"
+          onClick={event => handleProjectDelete(event)}
+        >
+          Delete Project!
+        </button>
+        <select
+          style={{ float: "left", margin: "5px" }}
+          id="loopSelect"
+          defaultValue="1"
+        >
+          <option value="1">play once</option>
+          <option value="2">play twice</option>
+          <option value="3">play three times</option>
+          <option value="4">play four times</option>
+        </select>
+        <div style={{ float: "left", margin: "5px" }}>
+          BPM: <input defaultValue="80" id="inputBPM"></input>
+        </div>
+      </div>
+
+      <div
+        style={{
+          margin: "auto",
+          marginTop: "10px",
+          marginBottom: "10px",
+          border: "1px solid grey",
+          padding: "5px",
+          overflow: "auto",
+          width: "60%",
+          backgroundColor: "lightGrey"
         }}
       >
         {project
@@ -316,10 +392,24 @@ function Project() {
             ))
           : null}
       </div>
-      <hr />
-      {project.notes[0] && <Notation notation={getNotation()} />}
 
-      <a href={"/user/" + sessionStorage.getItem("username")}>
+      {project.notes[0] && (
+        <div
+          style={{
+            backgroundColor: "white",
+            width: "60%",
+            margin: "auto",
+            marginBottom: "100px"
+          }}
+        >
+          <Notation notation={getNotation()} />
+        </div>
+      )}
+
+      <a
+        style={{ margin: "100px" }}
+        href={"/user/" + sessionStorage.getItem("username")}
+      >
         Go back to your projects page
       </a>
     </div>

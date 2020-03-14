@@ -118,7 +118,7 @@ router.put("/project/:id", (req, res, next) => {
   return res.json(1);
 });
 
-router.delete("/projects/:id", (req, res, next) => {
+router.delete("/project/:id", (req, res, next) => {
   db.Projects.findOneAndDelete({ _id: req.params.id })
     .then(data => res.json(data))
     .catch(next);
