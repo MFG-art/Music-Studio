@@ -1,4 +1,4 @@
-# [NoteJam Music Studio]((https://react-portfolio-mfg-art.herokuapp.com/)
+# [NoteJam Music Studio](https://react-portfolio-mfg-art.herokuapp.com/)
  A music studio that uses Web Audio API
 
 ## Table of Contents
