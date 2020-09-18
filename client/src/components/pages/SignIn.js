@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function handleSignIn() {
   console.log("I've been clicked!");
   var loginInfo = {
     username: document.getElementById("username-input").value,
-    password: document.getElementById("password-input").value
+    password: document.getElementById("password-input").value,
   };
   console.log(loginInfo);
   axios
     .get("api/users")
-    .then(function(response) {
+    .then(function (response) {
       console.log(response.data);
       console.log(response.data[0]._id);
 
@@ -38,7 +40,7 @@ function handleSignIn() {
         alert("Invalid login info");
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error);
     });
 }
@@ -46,7 +48,8 @@ function handleSignIn() {
 function SignIn() {
   return (
     <div>
-      <div className="box">
+      <Header />
+      <div className="box" style={{ margin: "100px auto" }}>
         <h1>Sign in</h1>
         <input
           id="username-input"
@@ -68,6 +71,7 @@ function SignIn() {
           <div id="sign-up-btn">Sign Up</div>
         </a>
       </div>
+      <Footer />
     </div>
   );
 }

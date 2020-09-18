@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function handleSignUp() {
   console.log("Submit button was clicked");
   var newUserInfo = {
     username: document.getElementById("username-input").value,
-    password: document.getElementById("password-input").value
+    password: document.getElementById("password-input").value,
   };
   axios
     .get("api/users")
-    .then(function(response) {
+    .then(function (response) {
       console.log(response.data);
       var usersArray = response.data;
       var alreadyExists;
@@ -31,18 +33,18 @@ function handleSignUp() {
         console.log("Creating new account...");
         axios
           .post("api/users", newUserInfo)
-          .then(function(response) {
+          .then(function (response) {
             console.log(response);
             alert("Successfully created new account");
           })
-          .catch(function(err) {
+          .catch(function (err) {
             throw err;
           });
       } else {
         alert("This username has already been taken");
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error);
     });
 }
@@ -70,6 +72,7 @@ function SignUp() {
 
   return (
     <div>
+      <Header />
       <div className="box">
         <h1>Create a new account:</h1>
         <input
@@ -105,6 +108,7 @@ function SignUp() {
           <div id="sign-up-btn">Log In</div>
         </a>
       </div>
+      <Footer />
     </div>
   );
 }
